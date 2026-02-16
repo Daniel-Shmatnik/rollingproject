@@ -1,0 +1,24 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# SSH keys (never commit private keys!)
+*.pem
+*.key
+builder_key.pem
+
+# Variable files with secrets
+*.tfvars
+!example.tfvars
+
+# Local Terraform directories
+.terraformrc
+terraform.rc
