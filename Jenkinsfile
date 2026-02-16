@@ -93,7 +93,7 @@ pipeline {
             echo ""
             echo "To run locally:"
             echo "  docker pull ${IMAGE_NAME}:latest"
-            echo "  docker run -p 5000:5000 ${IMAGE_NAME}:latest"
+            echo "  docker run -p 5001:5001 ${IMAGE_NAME}:latest"
             echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         }
         failure {
