@@ -60,12 +60,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo '=== Building Docker Image ==='
-                dir('python') {
-                    sh """
-                        docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-                        docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest
-                    """
-                }
+                sh """
+                    docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                    docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${IMAGE_NAME}:latest
+                """
                 echo "✓ Docker image built successfully: ${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
