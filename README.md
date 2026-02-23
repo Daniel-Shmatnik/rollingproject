@@ -47,8 +47,8 @@ If you are testing this project, some variables are specific to the original dev
 | `REGION`                | app.py            | `us-east-1`                      | Your preferred AWS region                            | Flask App      |
 | `EXPOSE 5001`           | Dockerfile        | Port 5001                        | Change only if you modify the port in app.py         | Docker         |
 | `aws_region`            | variables.tf      | `us-east-1`                      | Your AWS region                                      | Terraform only |
-| `vpc_id`                | variables.tf      | `vpc-044604d0bfb707142`          | **Must change** — your VPC ID                        | Terraform only |
-| `instance_type`         | variables.tf      | `t3.micro`                       | Change if you need a different size                  | Terraform only |
+| `vpc_id`                | variables.tf      | `vpc-044604d0bfb707142`          | Your VPC ID, or uses developer default if not set    | Terraform only |
+| `instance_type`         | variables.tf      | `t3.medium`                      | Change if you need a different size                  | Terraform only |
 | `instance_name`         | variables.tf      | `builder`                        | Any name you prefer                                  | Terraform only |
 | `subnet_id`             | variables.tf      | Auto-discovers public subnet     | Your subnet ID, or leave empty to auto-detect        | Terraform only |
 | `my_ip`                 | variables.tf      | Auto-detected via checkip        | Your IP in CIDR (e.g. `1.2.3.4/32`), or leave empty  | Terraform only |
@@ -69,7 +69,8 @@ docker run -p 5001:5001 \
 # 2. Deploy infrastructure with Terraform
 cd Terraform
 terraform init
-terraform apply -var="vpc_id=<your-vpc-id>"
+terraform apply                              # uses default VPC, or:
+terraform apply -var="vpc_id=<your-vpc-id>"  # specify your own
 
 # 3. Access the dashboard
 # http://localhost:5001 (local) or http://<ec2-public-ip>:5001 (deployed)
