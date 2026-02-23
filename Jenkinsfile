@@ -21,36 +21,22 @@ pipeline {
             parallel {
                 stage('Linting') {
                     steps {
-                        echo '=== Running Linting Checks (Mock) ==='
+                        echo '=== Running Linting Checks ==='
                         sh '''
-                            echo "Running Flake8 for Python..."
-                            echo "✓ Flake8 Python Linting: PASSED"
-                            echo "✓ No style violations found"
-                            echo ""
-                            echo "Running ShellCheck for Shell scripts..."
-                            echo "✓ ShellCheck Linting: PASSED"
-                            echo "✓ No shell script issues found"
-                            echo ""
-                            echo "Running Hadolint for Dockerfile..."
-                            echo "✓ Hadolint Dockerfile Linting: PASSED"
-                            echo "✓ Dockerfile follows best practices"
+                            pip install flake8 --break-system-packages -q
+                            echo "--- Flake8 Python Linting ---"
+                            flake8 python/ --max-line-length=120 || true
                         '''
                     }
                 }
                 
                 stage('Security Scan') {
                     steps {
-                        echo '=== Running Security Scans (Mock) ==='
+                        echo '=== Running Security Scans ==='
                         sh '''
-                            echo "Running Bandit for Python security..."
-                            echo "✓ Bandit Security Scan: PASSED"
-                            echo "✓ No security issues found in Python code"
-                            echo "✓ Scanned files: 0 vulnerabilities detected"
-                            echo ""
-                            echo "Running Trivy for container security..."
-                            echo "✓ Trivy Container Security Scan: PASSED"
-                            echo "✓ No critical vulnerabilities found"
-                            echo "✓ Image is safe to deploy"
+                            pip install bandit --break-system-packages -q
+                            echo "--- Bandit Python Security Scan ---"
+                            bandit -r python/ || true
                         '''
                     }
                 }
