@@ -84,3 +84,15 @@ terraform apply -var="vpc_id=<your-vpc-id>"  # specify your own
 4. **Image Security Scan** — scans the Docker image with Trivy for HIGH and CRITICAL CVEs
 5. **Push to Docker Hub** — authenticates and pushes the image
 6. **Cleanup** — removes local images after the build
+
+## Proof of Success
+
+### Jenkins Pipeline Stages
+All automated stages passing successfully:
+
+![Jenkins Stage View](jenkins%20file%20stage%20review.png)
+
+### Docker Hub Verification
+The final image available in the Docker Hub registry:
+
+![Docker Hub Image](dockerhub%20image%20confirmation.png)
