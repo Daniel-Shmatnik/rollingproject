@@ -59,7 +59,14 @@ If you are testing this project, some variables are specific to the original dev
 ## Quick Start
 
 ```bash
-# 1. Run the app locally with Docker
+# 1. Pull and run the pre-built image from Docker Hub
+docker pull danielshmatnik/flask-aws-monitor:latest
+docker run -p 5001:5001 \
+  -e AWS_ACCESS_KEY_ID=<your-key> \
+  -e AWS_SECRET_ACCESS_KEY=<your-secret> \
+  danielshmatnik/flask-aws-monitor:latest
+
+# Or build from source
 docker build -t flask-aws-monitor .
 docker run -p 5001:5001 \
   -e AWS_ACCESS_KEY_ID=<your-key> \
@@ -85,7 +92,7 @@ terraform apply -var="vpc_id=<your-vpc-id>"  # specify your own
 5. **Push to Docker Hub** — authenticates and pushes the image
 6. **Cleanup** — removes local images after the build
 
-## Proof of Success
+## screenshot Verification of steps
 
 ### Jenkins Pipeline Stages
 All automated stages passing successfully:
