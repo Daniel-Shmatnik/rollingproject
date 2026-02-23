@@ -19,18 +19,13 @@ A CI/CD pipeline that builds and deploys a Flask web application for monitoring 
 
 ## How It Works
 
+The project requires **Docker**, **Jenkins** (running in a Docker container with Docker socket access), **Terraform >= 1.0**, an **AWS account** with configured credentials, and a **Docker Hub** account.
+
 1. **Jenkins** clones the repo, runs linting (Flake8), security scanning (Bandit), builds a Docker image, scans it for vulnerabilities (Trivy), and pushes it to Docker Hub.
 2. **Docker** packages the Flask app into a portable container.
 3. **Terraform** provisions an EC2 instance on AWS to host the application.
 4. **Flask app** connects to AWS via Boto3 and displays EC2 instances, VPCs, Load Balancers, and AMIs in a web dashboard.
 
-## Prerequisites
-
-- Docker
-- Jenkins (running in a Docker container with Docker socket access)
-- Terraform >= 1.0
-- AWS account with configured credentials
-- Docker Hub account
 
 ## Tester Notice — Variables You May Need to Change
 
