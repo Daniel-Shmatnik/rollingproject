@@ -54,6 +54,16 @@ pipeline {
             }
         }
         
+        stage('Image Security Scan') {
+            steps {
+                echo '=== Running Trivy Container Scan ==='
+                sh """
+                    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+                    trivy image --severity HIGH,CRITICAL ${IMAGE_NAME}:${IMAGE_TAG} || true
+                """
+            }
+        }
+
         stage('Push to Docker Hub') {
             steps {
                 echo '=== Pushing to Docker Hub ==='

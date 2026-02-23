@@ -19,7 +19,7 @@ A CI/CD pipeline that builds and deploys a Flask web application for monitoring 
 
 ## How It Works
 
-1. **Jenkins** clones the repo, runs linting (Flake8) and security scanning (Bandit), builds a Docker image, and pushes it to Docker Hub.
+1. **Jenkins** clones the repo, runs linting (Flake8), security scanning (Bandit), builds a Docker image, scans it for vulnerabilities (Trivy), and pushes it to Docker Hub.
 2. **Docker** packages the Flask app into a portable container.
 3. **Terraform** provisions an EC2 instance on AWS to host the application.
 4. **Flask app** connects to AWS via Boto3 and displays EC2 instances, VPCs, Load Balancers, and AMIs in a web dashboard.
@@ -81,5 +81,6 @@ terraform apply -var="vpc_id=<your-vpc-id>"  # specify your own
 1. **Clone Repository** — pulls the latest code from GitHub
 2. **Parallel Checks** — runs Flake8 linting and Bandit security scanning simultaneously
 3. **Build Docker Image** — builds and tags the container image
-4. **Push to Docker Hub** — authenticates and pushes the image
-5. **Cleanup** — removes local images after the build
+4. **Image Security Scan** — scans the Docker image with Trivy for HIGH and CRITICAL CVEs
+5. **Push to Docker Hub** — authenticates and pushes the image
+6. **Cleanup** — removes local images after the build
